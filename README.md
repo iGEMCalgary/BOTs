@@ -1,8 +1,25 @@
 # BOTs
 BioBrick Optimization Tool for synthesis
+- created for synthetic biologists
+- created for the [iGEM 2019 competition] (https://2019.igem.org/Team:Calgary/BOT)
+Built over top of Brian Weitzner's codon-harmony
 
+### Functionality
+Allows to optimize for multiple factors at once
+- repeats
+- gc richness
+- hairpins
+- homopolymers
+- host optimization
+- restriction enzymes
+- splice sites
+- alternative start sites
 
+Just fill out the form and your potential sequences will appear after a few minutes
 
+### Purpose
+
+After a teammate struggled with a sequence that had a score of over 100, and spent 2 weeks of non-stop labour trying to minimize it, a demand for a program to potentially do this faster appeared.  
 
 
 ### Software Engineering Diagrams
