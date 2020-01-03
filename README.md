@@ -2,6 +2,7 @@
 BioBrick Optimization Tool for synthesis
 - created for synthetic biologists
 - created for the [iGEM 2019 competition] (https://2019.igem.org/Team:Calgary/BOT)
+
 Built over top of Brian Weitzner's codon-harmony
 
 ### Functionality
