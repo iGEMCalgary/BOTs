@@ -1,3 +1,4 @@
 db.sqlite3
 BOTS/settings.py
 sequence_optimization/migrations
+venv

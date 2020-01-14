@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>BOTS</title>
     {% load static %}
+    {% load crispy_forms_tags %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/general_look.css' %}">
@@ -11,28 +12,20 @@
 <body>
 <!--Title section-->
             <div class="row dark-orange-on-blue">
-                <h1 id="title">Biobrick Optimization Tool for Synthesis</h1>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <h3 id="small-title">BOTS</h3>
+                    </div>
+                <div class="col-lg-8 col-md-8 col-sm-0 col-xs-0">
+                    {% block form-subtitle %}
+                    {% endblock %}
+                </div>
             </div>
 <!--END Title section-->
-<!--Sub Title section-->
-            <div class="row blue-on-dark-orange">
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                    <h3 id="subtitle">
-                        Optimize your codons effortlessly
-                    </h3>
-                    <p class="bar_text">
-                        Expression & synthesis
-                    </p>
-                </div>
-                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                    <p class="bar_text">
-                        1. Add your sequence<br />
-                        2. Check the settings<br />
-                        3. Press SUBMIT to start!<br />
-                    </p>
-                </div>
-            </div>
-<!--END Sub Title section-->
+<!--Content section-->
+            {% block form %}
+
+            {% endblock %}
+<!--END Content section-->
 <!--Nav section-->
             <div class="row black-on-white">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -46,19 +39,6 @@
                 </div>
             </div>
 <!--END Nav section-->
-<!--Content section-->
-            <div class="row sequence_list">
-                {% if ancestor_sequence_list %}
-                <ul>
-                {% for ancestor_sequence in ancestor_sequence_list %}
-                    <li>Ancestor Sequence: {{ ancestor_sequence.sequence }}</li>
-                {% endfor %}
-                </ul>
-                {% else %}
-                    <p>No ancestor sequence are available.</p>
-                {% endif %}
-            </div>
-<!--END Content section-->
 <!--footer section-->
             <footer style="color:black;">
                                     BOTS uses a modified version of LyellBio's Brian Weitzner codon-harmony python package. <br />
