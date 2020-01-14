@@ -16,14 +16,13 @@ def index(request):
         ancestor_sequence_list = AncestorSequence.objects.order_by('sequence')
         context = {
             'ancestor_sequence_list': ancestor_sequence_list,
-            'login_status': True,
         }
         template = loader.get_template('sequence_optimization/index.html')
         return HttpResponse(template.render(context, request))
     else:
         # blank
         template = loader.get_template('sequence_optimization/index.html')
-        context = {'login_status': False, }
+        context = {}
         return HttpResponse(template.render(context, request))
 
 
@@ -33,7 +32,19 @@ class RegisterUser(generic.CreateView):
     template_name = 'sequence_optimization/registration.html'
 
 
-class AddSequence(generic.CreateView):
-    form_class = AddSequenceForm
-    success_url = reverse_lazy('')
-    template_name = 'sequence_optimization/add_sequence.html'
+def add_sequence(request):
+    if request.method == 'POST':  # form submitted
+        form = AddSequenceForm(request.POST, request.FILES)
+        context = {}
+        if form.is_valid():
+            context = {}
+        template = loader.get_template('sequence_optimization/index.html')
+        return HttpResponse(template.render(context, request))
+
+    if request.method == 'GET':  # initial visit
+        form = AddSequenceForm()
+        context = {
+            'form': form
+        }
+        template = loader.get_template('sequence_optimization/add_sequence.html')
+        return HttpResponse(template.render(context, request))

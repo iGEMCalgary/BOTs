@@ -42,7 +42,7 @@ class SequenceParameters(models.Model):
         MinValueValidator(5, "Archive must be greater or equal to 5"),
         MaxValueValidator(1000, "Archive must be smaller or equal to 1000")])
 
-    minimum_codon_occurence = models.DecimalField(blank=False, null=False, validators=[
+    minimum_codon_occurence = models.DecimalField(max_digits=4, decimal_places=3, blank=False, null=False, validators=[
         MinValueValidator(0, "Minimum codon occurence must be greater or equal to 0"),
         MaxValueValidator(1, "Minimum codon occurence must be smaller or equal to 1")])
 

@@ -15,4 +15,5 @@ urlpatterns = [
          name='password_reset_confirm'),
     path('accounts/reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('accounts/registration/', views.RegisterUser.as_view(), name='register_user'),
+    path('add_sequence/', views.add_sequence, name='add_sequence'),
 ]
