@@ -42,9 +42,9 @@ class SequenceParameters(models.Model):
         MinValueValidator(5, "Archive must be greater or equal to 5"),
         MaxValueValidator(1000, "Archive must be smaller or equal to 1000")])
 
-    minimum_codon_occurence = models.PositiveSmallIntegerField(blank=False, null=False, validators=[
+    minimum_codon_occurence = models.DecimalField(blank=False, null=False, validators=[
         MinValueValidator(0, "Minimum codon occurence must be greater or equal to 0"),
-        MaxValueValidator(100, "Minimum codon occurence must be smaller or equal to 100")])
+        MaxValueValidator(1, "Minimum codon occurence must be smaller or equal to 1")])
 
     mutation_probability = models.DecimalField(max_digits=4, decimal_places=3, blank=False, null=False, validators=[
         MaxValueValidator(1, "Mutation probability must be between 0 and 1"),
@@ -58,7 +58,7 @@ class SequenceParameters(models.Model):
     remove_alternate_start_sites = models.BooleanField(blank=False, null=False)
 
     max_generations = models.PositiveSmallIntegerField(blank=False, null=False, validators=[
-        MinValueValidator(0, "Generations must be greater or equal to 0"),
+        MinValueValidator(5, "Generations must be greater or equal to 5"),
         MaxValueValidator(500, "Generations must be smaller or equal to 500")])
 
     # Can be null
@@ -66,6 +66,7 @@ class SequenceParameters(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
 
     # TODO: Revisit table path
+    # TODO: Add the new bool fields
     table_path = models.FilePathField(default=None, blank=True, null=True)
     gc = models.ManyToManyField('GCInfo', through='GCParameters')
 
