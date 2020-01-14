@@ -6,6 +6,7 @@ from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 
+from sequence_optimization.forms import AddSequenceForm
 from sequence_optimization.models import *
 
 
@@ -32,7 +33,7 @@ class RegisterUser(generic.CreateView):
     template_name = 'sequence_optimization/registration.html'
 
 
-def add_sequence(request):
-    template = loader.get_template('sequence_optimization/add_sequence.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
+class AddSequence(generic.CreateView):
+    form_class = AddSequenceForm
+    success_url = reverse_lazy('')
+    template_name = 'sequence_optimization/add_sequence.html'
