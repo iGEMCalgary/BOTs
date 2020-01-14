@@ -1,7 +1,10 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.urls import reverse_lazy
+from django.views import generic
 
 from sequence_optimization.models import *
 
@@ -23,16 +26,10 @@ def index(request):
         return HttpResponse(template.render(context, request))
 
 
-def login_user(request):
-    template = loader.get_template('sequence_optimization/user.html')
-    context = {}
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-    return HttpResponse(template.render(context, request))
+class RegisterUser(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'sequence_optimization/registration.html'
 
 
 def add_sequence(request):
