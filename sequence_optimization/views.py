@@ -33,18 +33,20 @@ class RegisterUser(generic.CreateView):
 
 
 def add_sequence(request):
-    if request.method == 'POST':  # form submitted
-        form = AddSequenceForm(request.POST, request.FILES)
-        context = {}
-        if form.is_valid():
-            context = {}
-        template = loader.get_template('sequence_optimization/index.html')
-        return HttpResponse(template.render(context, request))
-
     if request.method == 'GET':  # initial visit
         form = AddSequenceForm()
         context = {
             'form': form
         }
         template = loader.get_template('sequence_optimization/add_sequence.html')
+        return HttpResponse(template.render(context, request))
+
+    elif request.method == 'POST':  # form submitted
+        form = AddSequenceForm(request.POST, request.FILES)
+        context = {}
+        if form.is_valid():
+            form = form.cleaned_data
+            template = loader.get_template('sequence_optimization/index.html')
+        else:
+            template = loader.get_template('sequence_optimization/add_sequence.html')
         return HttpResponse(template.render(context, request))
