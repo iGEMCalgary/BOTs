@@ -6,7 +6,7 @@ from django.template import loader
 from django.urls import reverse_lazy
 from django.views import generic
 
-from sequence_optimization.forms import AddSequenceForm
+from sequence_optimization.forms import AddSequenceForm, OptimizeSequenceForm
 from sequence_optimization.models import *
 
 
@@ -49,4 +49,14 @@ def add_sequence(request):
             template = loader.get_template('sequence_optimization/index.html')
         else:
             template = loader.get_template('sequence_optimization/add_sequence.html')
+        return HttpResponse(template.render(context, request))
+
+
+def optimize_sequence(request):
+    if request.method == 'GET':
+        form = OptimizeSequenceForm()
+        context = {
+            'form': form
+        }
+        template = loader.get_template('sequence_optimization/optimize_sequence.html')
         return HttpResponse(template.render(context, request))

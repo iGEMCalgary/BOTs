@@ -3,7 +3,14 @@ import re
 from django import forms
 from django.core.exceptions import ValidationError
 
-from sequence_optimization.models import GCInfo
+from sequence_optimization.models import *
+
+
+class OptimizeSequenceForm(forms.Form):
+    sequence_parameters = forms.ModelMultipleChoiceField(queryset=SequenceParameters.objects.all(), required=False)
+
+    def __init__(self, username):
+        super().__init__()
 
 
 class AddSequenceForm(forms.Form):
@@ -21,9 +28,14 @@ class AddSequenceForm(forms.Form):
                                          required=True)
 
     restriction_enzymes = forms.CharField(label='Restriction Enzymes', max_length=100, required=False)
-    gc = forms.ModelMultipleChoiceField(queryset=GCInfo.objects.all(), required=False)
+    if 0:
+        gc = forms.ModelMultipleChoiceField(queryset=GCInfo.objects.all(), required=False)
+    else:
+        count = 0
+        all_gc = list()
+        for gc in GCInfo.objects.all():
+            all_gc.append(forms.BooleanField(label=str(gc), required=False))
     # all different optimizations
-
     minimize_splice_sites = forms.BooleanField(label='Minimize Splice Sites', required=False)
     minimize_alternate_start_sites = forms.BooleanField(label='Minimize Alternate Start Sites', required=False)
     minimize_hairpins = forms.BooleanField(label='Minimize Hairpins', required=False)

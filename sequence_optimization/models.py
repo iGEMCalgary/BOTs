@@ -54,9 +54,12 @@ class SequenceParameters(models.Model):
         MinValueValidator(0, "Mutation probability must be between 0 and 1")])
 
     restriction_enzymes = models.CharField(max_length=100, blank=False, null=False)
-    remove_splice_sites = models.BooleanField(blank=False, null=False)
-    remove_alternate_start_sites = models.BooleanField(blank=False, null=False)
-
+    minimize_splice_sites = models.BooleanField(blank=False, null=False)
+    minimize_alternate_start_sites = models.BooleanField(blank=False, null=False)
+    minimize_hairpins = models.BooleanField(blank=False, null=False)
+    minimize_homopolymers = models.BooleanField(blank=False, null=False)
+    minimize_repeats = models.BooleanField(blank=False, null=False)
+    optimize_codons = models.BooleanField(blank=False, null=False)
     max_generations = models.PositiveSmallIntegerField(blank=False, null=False, validators=[
         MinValueValidator(5, "Generations must be greater or equal to 5"),
         MaxValueValidator(500, "Generations must be smaller or equal to 500")])
@@ -66,7 +69,6 @@ class SequenceParameters(models.Model):
     user = models.ForeignKey(User, on_delete=models.PROTECT, blank=True, null=True)
 
     # TODO: Revisit table path
-    # TODO: Add the new bool fields
     table_path = models.FilePathField(default=None, blank=True, null=True)
     gc = models.ManyToManyField('GCInfo', through='GCParameters')
 
