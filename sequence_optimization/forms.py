@@ -34,13 +34,10 @@ class AddSequenceForm(forms.Form):
     table_path = forms.FileField(label='Custom Host File', required=False)
 
     def clean(self):
-        cd = self.cleaned_data
-        self.sequence = "".join(str(cd.get("sequence")).split())
-        print("TESTTTTTTTTTTTTTTTTTTTTT")
-        print(self.sequence, cd.get("sequence"))
-        print(re.search("[^ACDEFGHILKMNPQRSTVWY]", str(self.sequence)))
-        print("TESTTTTTTTTTTTTTTTTTTTTT")
-        if re.search("[^ACDEFGHILKMNPQRSTVWY]", str(self.sequence)) is not None:
+        cd = self.cleaned_data  # dict
+        # clean whitespace
+        cd['sequence'] = str("".join(str(cd.get("sequence")).split())).replace('\\n', '')
+        if re.search("[^ACDEFGHILKMNPQRSTVWY]",  cd['sequence']) is not None:
             raise ValidationError("Sequence is not Amino Acids")
         # if host not on kasuza
         # if restriction enzymes dont exist
