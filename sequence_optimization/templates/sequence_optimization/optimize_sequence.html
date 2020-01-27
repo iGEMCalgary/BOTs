@@ -1,0 +1,15 @@
+{% extends "sequence_optimization/form_base_page.html" %}
+
+
+{% block form-subtitle %}
+<p>Optimize Sequence Sequence</p>
+{% endblock %}
+
+{% block form %}
+  <h2>Choose sequence to optimize Sequence</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Optimize Sequence</button>
+  </form>
+{% endblock %}

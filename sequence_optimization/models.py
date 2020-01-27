@@ -22,7 +22,7 @@ class AncestorSequenceOptimized(models.Model):
 
     def __str__(self):
         return str(self.ancestor_sequence) + \
-               '\n host: %s\n optimized_sequence: %s' % (self.host, self.optimized_sequence)
+               '  host: %s  optimized_sequence: %s' % (self.host, self.optimized_sequence)
 
 
 class SequenceParameters(models.Model):
@@ -77,21 +77,22 @@ class SequenceParameters(models.Model):
 
     def __str__(self):
         return str(self.sequence) + \
-               '\n population size: %s ' \
-               '\n archive size: %s ' \
-               '\n minimum codon occurence: %s ' \
-               '\n mutation probability: %s ' \
-               '\n crossover probability: %s ' \
-               '\n removes splice sites: %s ' \
-               '\n removes alternate start sites: %s ' \
-               '\n max generations: %s' % \
+               '**************NEEDS TO BE FIXED*************' \
+               '  population size: %s ' \
+               '  archive size: %s ' \
+               '  minimum codon occurence: %s ' \
+               '  mutation probability: %s ' \
+               '  crossover probability: %s ' \
+               '  removes splice sites: %s ' \
+               '  removes alternate start sites: %s ' \
+               '  max generations: %s' % \
                (self.population_size,
                 self.archive_size,
                 self.minimum_codon_occurence,
                 self.mutation_probability,
                 self.crossover_probability,
-                self.remove_splice_sites,
-                self.remove_alternate_start_sites,
+                self.minimize_splice_sites,
+                self.minimize_alternate_start_sites,
                 self.max_generations)
 
 
@@ -129,16 +130,16 @@ class MutatedSequence(models.Model):
 
     def __str__(self):
         return str(self.parameters) + \
-               '\n mutated_sequence: %s' \
-               '\n Fitness:' \
-               '\n hairpin: %s' \
-               '\n alternate start: %s' \
-               '\n gc: %s' \
-               '\n homopolymer: %s' \
-               '\n codon optimization: %s' \
-               '\n repeats: %s' \
-               '\n restriction enzymes: %s' \
-               '\n splice site: %s' % (
+               '  mutated_sequence: %s' \
+               '  Fitness:' \
+               '  hairpin: %s' \
+               '  alternate start: %s' \
+               '  gc: %s' \
+               '  homopolymer: %s' \
+               '  codon optimization: %s' \
+               '  repeats: %s' \
+               '  restriction enzymes: %s' \
+               '  splice site: %s' % (
                    self.mutated_sequence,
                    self.hairpin_fitness,
                    self.alternate_start_fitness,
@@ -160,7 +161,7 @@ class GCInfo(models.Model):
     parameters = models.ManyToManyField(SequenceParameters, through='GCParameters')
 
     def __str__(self):
-        return '%s\n min: %s\n max: %s\n frame: %s' % (
+        return '%s  min: %s  max: %s  frame: %s' % (
             self.name, self.minimum_percentage, self.maximum_percentage, self.frame_size)
 
 
