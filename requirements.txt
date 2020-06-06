@@ -1,5 +1,5 @@
 biopython==1.74
-Django==2.2.6
+Django==2.2.13
 numpy==1.17.2
 python-codon-tables==0.1.8
 pytz==2019.3
